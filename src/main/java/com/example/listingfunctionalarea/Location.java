@@ -1,6 +1,7 @@
 package com.example.listingfunctionalarea;
 
 public class Location {
+
     private String street;
     private String city;
     private String state;

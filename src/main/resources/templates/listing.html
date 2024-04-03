@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Details</title>
+    <link rel="stylesheet" href="styles2.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="navbar">
+        <img id="logo" src="logo.png" alt="Logo" />
+        <div id="links">
+          <a href="#">Log Out</a>
+          <a href="#" th:text="${username}">[Username]</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="listing-container container">
+      <div class="image">
+        <img src="house.jpeg" alt="Property Image" />
+      </div>
+      <div class="details">
+        <h2>Property Name</h2>
+        <p>Location details</p>
+      </div>
+      <div class="info">
+        <div class="left-column">
+          <ul>
+            <li>Detail 1</li>
+            <li>Detail 2</li>
+            <li>Detail 3</li>
+          </ul>
+          <p>Price: $1000</p>
+          <a href="schedule.html" class="btn">Schedule</a>
+        </div>
+        <div class="right-column">
+          <h3>Reviews</h3>
+          <ul>
+            <li>Review 1</li>
+            <li>Review 2</li>
+            <li>Review 3</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

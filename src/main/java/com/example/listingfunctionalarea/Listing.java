@@ -1,28 +1,19 @@
 package com.example.listingfunctionalarea;
 
-import java.io.Serializable;
 import java.util.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-@Entity
 public class Listing{
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     private int propertyID;
     private String name;
     private String imageURL;
-    private Location location;
+    private String location;
     private Boolean vacancy;
     private ArrayList<Review> reviews;
 
-    public Listing (int propertyID, String name, String imageURL, Location location, Boolean vacancy, ArrayList<Review> reviews) {
+    public Listing (int propertyID, String name, String imageURL, String location, Boolean vacancy, ArrayList<Review> reviews) {
         this.propertyID = propertyID;
         this.name = name;
         this.imageURL = imageURL;
@@ -63,19 +54,19 @@ public class Listing{
         this.location = location;
     }
 
-    public int getVacancy() {
+    public boolean getVacancy() {
         return vacancy;
     }
 
-    public void setVacancy(int vacancy) {
+    public void setVacancy(Boolean vacancy) {
         this.vacancy = vacancy;
     }
 
-    public List<Review> getReviews() {
+    public ArrayList<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
+    public void setReviews(ArrayList<Review> reviews) {
         this.reviews = reviews;
     }
 }

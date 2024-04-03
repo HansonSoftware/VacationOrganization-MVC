@@ -3,34 +3,20 @@ package com.example.listingfunctionalarea;
 import java.util.Date;
 import java.util.ArrayList;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-
-@Entity
 public class Review{
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     private Long reviewId;
 
-    @ManyToOne
-    private PropertyUnderReview scheduledProperty;
-
 	private long userID;
     private Date lastEdit;
 
-    @OneToMany(mappedBy="reviewId")
+
     private ArrayList<ReviewComment> comments;
     private int rating;
 
-	public Review(PropertyUnderReview property, long userID, Date lastEdit, ArrayList<ReviewComment> comments, int rating, long reviewId) {
-	    this.scheduledProperty = property;
+	public Review(long userID, Date lastEdit, ArrayList<ReviewComment> comments, int rating, long reviewId) {
         this.userID = userID;
         this.lastEdit = lastEdit;
         this.comments = comments;
@@ -48,14 +34,6 @@ public class Review{
 
     public void setReviewId(long reviewId){
         this.reviewId = reviewId;
-    }
-
-    public void setScheduledProperty(PropertyUnderReview scheduledProperty){
-        this.scheduledProperty = scheduledProperty;
-    }
-
-    public PropertyUnderReview getScheduledProperty(){
-        return this.scheduledProperty;
     }
 
     public long getUserID(){
