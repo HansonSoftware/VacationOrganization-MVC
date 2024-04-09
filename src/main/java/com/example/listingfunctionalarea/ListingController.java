@@ -1,9 +1,5 @@
 package com.example.listingfunctionalarea;
 
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ListingController {
-
 
 	@GetMapping("/activeListings")
 	public String displayActiveListings(Model model) {
