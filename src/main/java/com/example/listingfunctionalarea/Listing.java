@@ -2,20 +2,21 @@ package com.example.listingfunctionalarea;
 
 import java.util.*;
 
-public class Listing{
-
-    private Long id;
+public class Listing {
 
     private int propertyID;
     private String name;
+    private int cost;
     private String imageURL;
     private String location;
     private Boolean vacancy;
     private ArrayList<Review> reviews;
 
-    public Listing (int propertyID, String name, String imageURL, String location, Boolean vacancy, ArrayList<Review> reviews) {
+    public Listing(int propertyID, String name, int cost, String imageURL, String location, Boolean vacancy,
+            ArrayList<Review> reviews) {
         this.propertyID = propertyID;
         this.name = name;
+        this.cost = cost;
         this.imageURL = imageURL;
         this.location = location;
         this.vacancy = vacancy;
@@ -36,6 +37,14 @@ public class Listing{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public String getImageURL() {
@@ -70,4 +79,3 @@ public class Listing{
         this.reviews = reviews;
     }
 }
-

@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Property Details</title>
-    <link rel="stylesheet" href="../static/style/listingStyle.css" />
+    <link rel="stylesheet" th:href="@{/style/listingStyle.css}" />
   </head>
   <body>
     <nav>
       <div class="navbar">
-        <img id="logo" src="../static/images/logo.png" alt="Logo" />
+        <img id="logo" th:src="@{/images/logo.png}" alt="Logo" />
         <div id="links">
           <a href="#">Log Out</a>
           <a href="#" th:text="${username}">[Username]</a>
@@ -17,30 +17,38 @@
       </div>
     </nav>
 
-    <div class="listing-container container">
-      <div class="image">
-        <img src="../static/images/house.jpeg" alt="Property Image" />
-      </div>
+    <div class="container">
       <div class="details">
-        <h2>Property Name</h2>
-        <p>Location details</p>
+        <h2 th:text="${listing.name}">Property Name</h2>
+        <p th:text="${listing.location}">Location details</p>
+      </div>
+      <div class="image">
+        <img
+          th:src="@{/images/{imageURL}(imageURL=${listing.imageURL})}"
+          alt="Property Image"
+        />
       </div>
       <div class="info">
         <div class="left-column">
-          <ul>
-            <li>Detail 1</li>
-            <li>Detail 2</li>
-            <li>Detail 3</li>
-          </ul>
-          <p>Price: $1000</p>
-          <a href="schedule.html" class="btn">Schedule</a>
+          <p class="price" th:text="'$' + ${listing.cost} + ' / night'">
+            Price
+          </p>
+          <a href="localhost:8080/schedule/0/1" class="btn">Schedule a visit</a>
         </div>
         <div class="right-column">
           <h3>Reviews</h3>
           <ul>
-            <li>Review 1</li>
-            <li>Review 2</li>
-            <li>Review 3</li>
+            <li th:each="review : ${listing.reviews}" class="review">
+              <p>
+                <span
+                  class="rating"
+                  th:text="${review.rating + ' stars'}"
+                ></span>
+                <span th:text="${review.lastEdit}"></span>
+              </p>
+              <p class="username" th:text="${review.userName}"></p>
+              <p class="comment" th:text="${review.comment}"></p>
+            </li>
           </ul>
         </div>
       </div>

@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Property Listings</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" th:href="@{/style/style.css}" rel="stylesheet" />
   </head>
   <body>
     <nav>
@@ -18,55 +17,18 @@
     </nav>
 
     <div class="grid-container">
-      <div class="tile">
+      <div class="tile" th:each="listing : ${listings}">
         <div class="tile-left">
-          <img src="house.jpeg" alt="Property Image" />
+          <img th:src="${listing.imageURL}" alt="Property Image" />
         </div>
         <div class="tile-right">
-          <h2>Property Name</h2>
-          <p>Location</p>
+          <h2 th:text="${listing.name}">Property Name</h2>
+          <p th:text="${listing.location}">Location</p>
           <a href="reviews.html" class="btn">View Reviews</a>
           <div class="price">$1000</div>
           <a href="schedule.html" class="btn">Schedule</a>
         </div>
       </div>
-      <div class="tile">
-        <div class="tile-left">
-          <img src="house.jpeg" alt="Property Image" />
-        </div>
-        <div class="tile-right">
-          <h2>Property Name</h2>
-          <p>Location</p>
-          <a href="reviews.html" class="btn">View Reviews</a>
-          <div class="price">$1000</div>
-          <a href="schedule.html" class="btn">Schedule</a>
-        </div>
-      </div>
-      <div class="tile">
-        <div class="tile-left">
-          <img src="house.jpeg" alt="Property Image" />
-        </div>
-        <div class="tile-right">
-          <h2>Property Name</h2>
-          <p>Location</p>
-          <a href="reviews.html" class="btn">View Reviews</a>
-          <div class="price">$1000</div>
-          <a href="schedule.html" class="btn">Schedule</a>
-        </div>
-      </div>
-      <div class="tile">
-        <div class="tile-left">
-          <img src="house.jpeg" alt="Property Image" />
-        </div>
-        <div class="tile-right">
-          <h2>Property Name</h2>
-          <p>Location</p>
-          <a href="reviews.html" class="btn">View Reviews</a>
-          <div class="price">$1000</div>
-          <a href="schedule.html" class="btn">Schedule</a>
-        </div>
-      </div>
-      <!-- Add more tiles here -->
     </div>
   </body>
 </html>
