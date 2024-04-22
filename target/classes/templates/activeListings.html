@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Property Listings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" th:href="@{/style/style.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <nav>
+      <div class="navbar">
+        <img id="logo" th:src="@{/images/logo.png}" alt="Logo" />
+        <div id="links">
+          <a href="#">Log Out</a>
+          <a href="#" th:text="${username}">[Username]</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="grid-container">
+      <div class="tile" th:each="listing : ${listings}">
+        <a th:href="@{'/listing/' + ${listing.propertyID}}">
+          <span class="link"></span>
+        </a>
+        <div class="tile-left">
+          <img
+            th:src="@{/images/{imageURL}(imageURL=${listing.imageURL})}"
+            alt="Property Image"
+          />
+        </div>
+        <div class="tile-right">
+          <h2 th:text="${listing.name}">Property Name</h2>
+
+          <p>
+            <span th:text="${listing.location.street}"></span><br />
+            <span th:text="${listing.location.city + ', '}"></span>
+            <span
+              th:text="${listing.location.state + ' ' + listing.location.zipCode}"
+            ></span>
+          </p>
+
+          <p class="price" th:text="'$' + ${listing.cost} + ' / night'">
+            Price
+          </p>
+          <a href="listing/1" class="btn">More Info</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
