@@ -20,7 +20,13 @@
     <div class="container">
       <div class="details">
         <h2 th:text="${listing.name}">Property Name</h2>
-        <p th:text="${listing.location}">Location details</p>
+        <p>
+          <span th:text="${listing.location.street}"></span><br />
+          <span th:text="${listing.location.city + ', '}"></span>
+          <span
+            th:text="${listing.location.state + ' ' + listing.location.zipCode}"
+          ></span>
+        </p>
       </div>
       <div class="image">
         <img
@@ -33,7 +39,13 @@
           <p class="price" th:text="'$' + ${listing.cost} + ' / night'">
             Price
           </p>
-          <a href="localhost:8080/schedule/0/1" class="btn">Schedule a visit</a>
+          <a
+            href="/0/1"
+            onclick="javascript:event.target.port=8080"
+            target="_blank"
+            class="btn"
+            >Schedule a visit</a
+          >
         </div>
         <div class="right-column">
           <h3>Reviews</h3>

@@ -1,6 +1,6 @@
 package com.example.listingfunctionalarea;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class Listing {
 
@@ -8,11 +8,11 @@ public class Listing {
     private String name;
     private int cost;
     private String imageURL;
-    private String location;
+    private Location location;
     private Boolean vacancy;
     private ArrayList<Review> reviews;
 
-    public Listing(int propertyID, String name, int cost, String imageURL, String location, Boolean vacancy,
+    public Listing(int propertyID, String name, int cost, String imageURL, Location location, Boolean vacancy,
             ArrayList<Review> reviews) {
         this.propertyID = propertyID;
         this.name = name;
@@ -55,15 +55,15 @@ public class Listing {
         this.imageURL = imageURL;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
-    public boolean getVacancy() {
+    public Boolean getVacancy() {
         return vacancy;
     }
 

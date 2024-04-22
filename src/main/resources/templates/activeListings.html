@@ -19,7 +19,9 @@
 
     <div class="grid-container">
       <div class="tile" th:each="listing : ${listings}">
-        <a href="listing/1"><span class="link"></span></a>
+        <a th:href="@{'/listing/' + ${listing.propertyID}}">
+          <span class="link"></span>
+        </a>
         <div class="tile-left">
           <img
             th:src="@{/images/{imageURL}(imageURL=${listing.imageURL})}"
@@ -28,7 +30,15 @@
         </div>
         <div class="tile-right">
           <h2 th:text="${listing.name}">Property Name</h2>
-          <p th:text="${listing.location}">Location</p>
+
+          <p>
+            <span th:text="${listing.location.street}"></span><br />
+            <span th:text="${listing.location.city + ', '}"></span>
+            <span
+              th:text="${listing.location.state + ' ' + listing.location.zipCode}"
+            ></span>
+          </p>
+
           <p class="price" th:text="'$' + ${listing.cost} + ' / night'">
             Price
           </p>
