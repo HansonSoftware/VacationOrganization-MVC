@@ -12,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-
 import org.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +44,7 @@ public class ListingController {
 		ArrayList<Review> reviews = chosenListing.getReviews();
 
 		// API call to Reviewing functional area
-		String url = "http://localhost:8082/getPropertyReviews/" + propertyID;
+		String url = "http://localhost:8092/getPropertyReviews/" + propertyID;
 		callReviewingMicroservice(url, reviews);
 
 		// Update reviews list in chosenListing Object
@@ -59,10 +58,12 @@ public class ListingController {
 	}
 
 	private void callReviewingMicroservice(String url, ArrayList<Review> reviews) {
-
 		try {
 			String json = IOUtils.toString(new URL(url), StandardCharsets.UTF_8);
-			int ratingID = 0;
+			if (json == null) {
+				System.out.println("json is null");
+				return;
+			}
 
 			// Parse the JSON
 			ObjectMapper mapper = new ObjectMapper();
@@ -72,48 +73,20 @@ public class ListingController {
 				for (JsonNode reviewNode : reviewsNode) {
 					String userName = reviewNode.get("userName").asText();
 					String comment = reviewNode.get("comment").asText();
-					String lastEdit = reviewNode.get("lastEdit").asText();
-					String rating = reviewNode.get("rating").asText();
+					String date = reviewNode.get("date").asText(); // Corrected to "date" instead of "lastEdit"
+					int rating = reviewNode.get("rating").asInt(); // Parsing rating as int directly
 
-					// Parse lastEdit string to Date (example format "MM/dd")
-					Date lastEditDate = parseDate(lastEdit);
-					// Parse rating string to int (example format "X/Y")
-					int ratingValue = parseRating(rating);
+					// Parse date string to Date object
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+					Date reviewDate = dateFormat.parse(date);
 
-					// Create review objects for each review in JSON array
-					Review review = new Review(userName, comment, lastEditDate, ratingValue, ratingID);
+					// Create review object
+					Review review = new Review(userName, comment, reviewDate, rating, 1);
 					reviews.add(review);
-
-					ratingID++;
 				}
 			}
-		} catch (IOException e) {
-			System.out.println("Ensure the :8092 server is running");
-		}
-	}
-
-	private Date parseDate(String dateStr) {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
-		try {
-			return sdf.parse(dateStr);
-		} catch (ParseException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	private int parseRating(String ratingStr) {
-		String[] parts = ratingStr.split("/");
-		if (parts.length == 2) {
-			try {
-				return Integer.parseInt(parts[0]);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-				return 0;
-			}
-		} else {
-			// Invalid rating format
-			return 0;
+		} catch (IOException | ParseException e) {
+			System.out.println("Error occurred: " + e.getMessage());
 		}
 	}
 
